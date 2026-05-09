@@ -8,6 +8,7 @@ import stream from "../stream/stream.js";
 import match from "../processing/match.js";
 
 import authRoutes from '../routes/auth.js';
+import userRoutes from '../routes/user.js';
 import { unifiedPolicyEngine } from '../middleware/policy.js';
 import { identityMiddleware } from '../middleware/identity.js';
 
@@ -81,6 +82,7 @@ export const runAPI = async (express, app, __dirname, isPrimary = true) => {
     }));
 
     app.use('/auth', express.json({ limit: 1024 }), authRoutes);
+    app.use('/user', express.json({ limit: 1024 }), userRoutes);
 
     app.post('/', (req, res, next) => {
         if (!acceptRegex.test(req.header('Accept'))) {
