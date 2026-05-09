@@ -50,7 +50,7 @@ export const runAPI = async (express, app, __dirname, isPrimary = true) => {
 
     const getServerInfo = () => {
         return JSON.stringify({
-            cobalt: {
+            CyberCygan: {
                 version: version,
                 url: env.apiURL,
                 startTime: `${startTimestamp}`,
@@ -356,7 +356,7 @@ export const runAPI = async (express, app, __dirname, isPrimary = true) => {
     }, () => {
         if (isPrimary) {
             console.log(`\n` +
-                Bright(Cyan("cobalt ")) + Bright("API ^ω^") + "\n" +
+                Bright(Cyan("CyberCygan ")) + Bright("API ^ω^") + "\n" +
 
                 "~~~~~~\n" +
                 Bright("version: ") + version + "\n" +
