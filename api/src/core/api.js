@@ -1,6 +1,5 @@
 import cors from "cors";
 import http from "node:http";
-import rateLimit from "express-rate-limit";
 import { setGlobalDispatcher, EnvHttpProxyAgent } from "undici";
 import { getCommit, getBranch, getRemote, getVersion } from "@imput/version-info";
 
@@ -8,11 +7,14 @@ import jwt from "../security/jwt.js";
 import stream from "../stream/stream.js";
 import match from "../processing/match.js";
 
+import authRoutes from '../routes/auth.js';
+import { unifiedPolicyEngine } from '../middleware/policy.js';
+import { identityMiddleware } from '../middleware/identity.js';
+
 import { env } from "../config.js";
 import { extract } from "../processing/url.js";
 import { Bright, Cyan } from "../misc/console-text.js";
 import { hashHmac } from "../security/secrets.js";
-import { createStore } from "../store/redis-ratelimit.js";
 import { randomizeCiphers } from "../misc/randomize-ciphers.js";
 import { verifyTurnstileToken } from "../security/turnstile.js";
 import { friendlyServiceName } from "../processing/service-alias.js";
@@ -65,50 +67,6 @@ export const runAPI = async (express, app, __dirname, isPrimary = true) => {
 
     const serverInfo = getServerInfo();
 
-    const handleRateExceeded = (_, res) => {
-        const { body } = createResponse("error", {
-            code: "error.api.rate_exceeded",
-            context: {
-                limit: env.rateLimitWindow
-            }
-        });
-        return res.status(429).json(body);
-    };
-
-    const keyGenerator = (req) => hashHmac(getIP(req), 'rate').toString('base64url');
-
-    const sessionLimiter = rateLimit({
-        windowMs: env.sessionRateLimitWindow * 1000,
-        limit: env.sessionRateLimit,
-        standardHeaders: 'draft-6',
-        legacyHeaders: false,
-        keyGenerator,
-        store: await createStore('session'),
-        handler: handleRateExceeded
-    });
-
-    const apiLimiter = rateLimit({
-        windowMs: env.rateLimitWindow * 1000,
-        limit: (req) => req.rateLimitMax || env.rateLimitMax,
-        standardHeaders: 'draft-6',
-        legacyHeaders: false,
-        keyGenerator: req => req.rateLimitKey || keyGenerator(req),
-        store: await createStore('api'),
-        handler: handleRateExceeded
-    });
-
-    const apiTunnelLimiter = rateLimit({
-        windowMs: env.tunnelRateLimitWindow * 1000,
-        limit: env.tunnelRateLimitMax,
-        standardHeaders: 'draft-6',
-        legacyHeaders: false,
-        keyGenerator: req => keyGenerator(req),
-        store: await createStore('tunnel'),
-        handler: (_, res) => {
-            return res.sendStatus(429);
-        }
-    });
-
     app.set('trust proxy', ['loopback', 'uniquelocal']);
 
     app.use('/', cors({
@@ -122,6 +80,8 @@ export const runAPI = async (express, app, __dirname, isPrimary = true) => {
         ...corsConfig,
     }));
 
+    app.use('/auth', express.json({ limit: 1024 }), authRoutes);
+
     app.post('/', (req, res, next) => {
         if (!acceptRegex.test(req.header('Accept'))) {
             return fail(res, "error.api.header.accept");
@@ -132,67 +92,8 @@ export const runAPI = async (express, app, __dirname, isPrimary = true) => {
         next();
     });
 
-    app.post('/', (req, res, next) => {
-        if (!env.apiKeyURL) {
-            return next();
-        }
+    app.post('/', identityMiddleware, unifiedPolicyEngine);
 
-        const { success, error } = APIKeys.validateAuthorization(req);
-        if (!success) {
-            // We call next() here if either if:
-            // a) we have user sessions enabled, meaning the request
-            //    will still need a Bearer token to not be rejected, or
-            // b) we do not require the user to be authenticated, and
-            //    so they can just make the request with the regular
-            //    rate limit configuration;
-            // otherwise, we reject the request.
-            if (
-                (env.sessionEnabled || !env.authRequired)
-                && ['missing', 'not_api_key'].includes(error)
-            ) {
-                return next();
-            }
-
-            return fail(res, `error.api.auth.key.${error}`);
-        }
-
-        req.authType = "key";
-        return next();
-    });
-
-    app.post('/', (req, res, next) => {
-        if (!env.sessionEnabled || req.rateLimitKey) {
-            return next();
-        }
-
-        try {
-            const authorization = req.header("Authorization");
-            if (!authorization) {
-                return fail(res, "error.api.auth.jwt.missing");
-            }
-
-            if (authorization.length >= 256) {
-                return fail(res, "error.api.auth.jwt.invalid");
-            }
-
-            const [ type, token, ...rest ] = authorization.split(" ");
-            if (!token || type.toLowerCase() !== 'bearer' || rest.length) {
-                return fail(res, "error.api.auth.jwt.invalid");
-            }
-
-            if (!jwt.verify(token, getIP(req, 32))) {
-                return fail(res, "error.api.auth.jwt.invalid");
-            }
-
-            req.rateLimitKey = hashHmac(token, 'rate');
-            req.authType = "session";
-        } catch {
-            return fail(res, "error.api.generic");
-        }
-        next();
-    });
-
-    app.post('/', apiLimiter);
     app.use('/', express.json({ limit: 1024 }));
 
     app.use('/', (err, _, res, next) => {
