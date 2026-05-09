@@ -1,12 +1,12 @@
-import type { CobaltPipelineItem, CobaltWorkerProgress } from "$lib/types/workers";
+import type { CyberCyganPipelineItem, CyberCyganWorkerProgress } from "$lib/types/workers";
 import type { UUID } from "./queue";
 
-export type CobaltCurrentTaskItem = {
-    type: CobaltPipelineItem['worker'],
+export type CyberCyganCurrentTaskItem = {
+    type: CyberCyganPipelineItem['worker'],
     parentId: UUID,
-    progress?: CobaltWorkerProgress,
+    progress?: CyberCyganWorkerProgress,
 }
 
-export type CobaltCurrentTasks = {
-    [id: UUID]: CobaltCurrentTaskItem,
+export type CyberCyganCurrentTasks = {
+    [id: UUID]: CyberCyganCurrentTaskItem,
 }

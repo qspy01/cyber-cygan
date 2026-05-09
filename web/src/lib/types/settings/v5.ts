@@ -1,8 +1,8 @@
-import { type CobaltSettingsV4 } from "$lib/types/settings/v4";
+import { type CyberCyganSettingsV4 } from "$lib/types/settings/v4";
 
-export type CobaltSettingsV5 = Omit<CobaltSettingsV4, 'schemaVersion' | 'advanced' | 'save' | 'privacy' | 'appearance'> & {
+export type CyberCyganSettingsV5 = Omit<CyberCyganSettingsV4, 'schemaVersion' | 'advanced' | 'save' | 'privacy' | 'appearance'> & {
     schemaVersion: 5,
-    appearance: Omit<CobaltSettingsV4['appearance'], 'reduceMotion' | 'reduceTransparency'> & {
+    appearance: Omit<CyberCyganSettingsV4['appearance'], 'reduceMotion' | 'reduceTransparency'> & {
         hideRemuxTab: boolean,
     },
     accessibility: {
@@ -11,11 +11,11 @@ export type CobaltSettingsV5 = Omit<CobaltSettingsV4, 'schemaVersion' | 'advance
         disableHaptics: boolean;
         dontAutoOpenQueue: boolean;
     },
-    advanced: CobaltSettingsV4['advanced'] & {
+    advanced: CyberCyganSettingsV4['advanced'] & {
         useWebCodecs: boolean;
     },
-    privacy: Omit<CobaltSettingsV4['privacy'], 'alwaysProxy'>,
-    save: Omit<CobaltSettingsV4['save'], 'tiktokH265' | 'twitterGif'> & {
+    privacy: Omit<CyberCyganSettingsV4['privacy'], 'alwaysProxy'>,
+    save: Omit<CyberCyganSettingsV4['save'], 'tiktokH265' | 'twitterGif'> & {
         alwaysProxy: boolean;
         localProcessing: boolean;
         allowH265: boolean;

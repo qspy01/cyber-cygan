@@ -1,11 +1,11 @@
 <script lang="ts">
     import Skeleton from "$components/misc/Skeleton.svelte";
-    import type { CobaltQueueItemRunning, UUID } from "$lib/types/queue";
+    import type { CyberCyganQueueItemRunning, UUID } from "$lib/types/queue";
 
     type Props = {
         percentage?: number;
         workerId: UUID;
-        pipelineResults: CobaltQueueItemRunning['pipelineResults'];
+        pipelineResults: CyberCyganQueueItemRunning['pipelineResults'];
     }
 
     let { percentage = 0, workerId, pipelineResults }: Props = $props();

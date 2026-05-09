@@ -10,7 +10,7 @@ const ffmpeg = async (
 ) => {
     if (!(files && output && args)) {
         self.postMessage({
-            cobaltFFmpegWorker: {
+            CyberCyganFFmpegWorker: {
                 error: "queue.ffmpeg.no_args",
             }
         });
@@ -19,7 +19,7 @@ const ffmpeg = async (
 
     const ff = new LibAVWrapper((progress) => {
         self.postMessage({
-            cobaltFFmpegWorker: {
+            CyberCyganFFmpegWorker: {
                 progress: {
                     durationProcessed: progress.out_time_sec,
                     speed: progress.speed,
@@ -35,7 +35,7 @@ const ffmpeg = async (
 
     const error = (code: string) => {
         self.postMessage({
-            cobaltFFmpegWorker: {
+            CyberCyganFFmpegWorker: {
                 error: code,
             }
         });
@@ -79,7 +79,7 @@ const ffmpeg = async (
         }
 
         self.postMessage({
-            cobaltFFmpegWorker: {
+            CyberCyganFFmpegWorker: {
                 progress: {
                     duration: Number(file_info.format.duration),
                 }
@@ -114,7 +114,7 @@ const ffmpeg = async (
         await ff.terminate();
 
         self.postMessage({
-            cobaltFFmpegWorker: {
+            CyberCyganFFmpegWorker: {
                 render
             }
         });
@@ -126,7 +126,7 @@ const ffmpeg = async (
 }
 
 self.onmessage = async (event: MessageEvent) => {
-    const ed = event.data.cobaltFFmpegWorker;
+    const ed = event.data.CyberCyganFFmpegWorker;
     if (ed?.variant && ed?.files && ed?.args && ed?.output) {
         await ffmpeg(ed.variant, ed.files, ed.args, ed.output, ed.yesthreads);
     }

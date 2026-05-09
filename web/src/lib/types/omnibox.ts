@@ -1,1 +1,1 @@
-export type CobaltDownloadButtonState = "idle" | "think" | "check" | "done" | "error";
+export type CyberCyganDownloadButtonState = "idle" | "think" | "check" | "done" | "error";

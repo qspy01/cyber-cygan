@@ -1,6 +1,6 @@
-import type { CobaltSettings } from "$lib/types/settings";
+import type { CyberCyganSettings } from "$lib/types/settings";
 
-enum CobaltResponseType {
+enum CyberCyganResponseType {
     Error = 'error',
     Picker = 'picker',
     Redirect = 'redirect',
@@ -8,8 +8,8 @@ enum CobaltResponseType {
     LocalProcessing = 'local-processing',
 }
 
-export type CobaltErrorResponse = {
-    status: CobaltResponseType.Error,
+export type CyberCyganErrorResponse = {
+    status: CyberCyganResponseType.Error,
     error: {
         code: string,
         context?: {
@@ -19,13 +19,13 @@ export type CobaltErrorResponse = {
     },
 };
 
-type CobaltPartialURLResponse = {
+type CyberCyganPartialURLResponse = {
     url: string,
     filename: string,
 }
 
-type CobaltPickerResponse = {
-    status: CobaltResponseType.Picker
+type CyberCyganPickerResponse = {
+    status: CyberCyganResponseType.Picker
     picker: {
         type: 'photo' | 'video' | 'gif',
         url: string,
@@ -35,15 +35,15 @@ type CobaltPickerResponse = {
     audioFilename?: string,
 };
 
-type CobaltRedirectResponse = {
-    status: CobaltResponseType.Redirect,
-} & CobaltPartialURLResponse;
+type CyberCyganRedirectResponse = {
+    status: CyberCyganResponseType.Redirect,
+} & CyberCyganPartialURLResponse;
 
-type CobaltTunnelResponse = {
-    status: CobaltResponseType.Tunnel,
-} & CobaltPartialURLResponse;
+type CyberCyganTunnelResponse = {
+    status: CyberCyganResponseType.Tunnel,
+} & CyberCyganPartialURLResponse;
 
-export const CobaltFileMetadataKeys = [
+export const CyberCyganFileMetadataKeys = [
     'album',
     'composer',
     'genre',
@@ -56,23 +56,23 @@ export const CobaltFileMetadataKeys = [
     'sublanguage',
 ];
 
-export type CobaltFileMetadata = Record<
-    typeof CobaltFileMetadataKeys[number], string | undefined
+export type CyberCyganFileMetadata = Record<
+    typeof CyberCyganFileMetadataKeys[number], string | undefined
 >;
 
-export type CobaltLocalProcessingType = 'merge' | 'mute' | 'audio' | 'gif' | 'remux' | 'proxy';
+export type CyberCyganLocalProcessingType = 'merge' | 'mute' | 'audio' | 'gif' | 'remux' | 'proxy';
 
-export type CobaltLocalProcessingResponse = {
-    status: CobaltResponseType.LocalProcessing,
+export type CyberCyganLocalProcessingResponse = {
+    status: CyberCyganResponseType.LocalProcessing,
 
-    type: CobaltLocalProcessingType,
+    type: CyberCyganLocalProcessingType,
     service: string,
     tunnel: string[],
 
     output: {
         type: string, // mimetype
         filename: string,
-        metadata?: CobaltFileMetadata,
+        metadata?: CyberCyganFileMetadata,
         subtitles?: boolean,
     },
 
@@ -87,15 +87,15 @@ export type CobaltLocalProcessingResponse = {
     isHLS?: boolean,
 }
 
-export type CobaltFileUrlType = "redirect" | "tunnel";
+export type CyberCyganFileUrlType = "redirect" | "tunnel";
 
-export type CobaltSession = {
+export type CyberCyganSession = {
     token: string,
     exp: number,
 }
 
-export type CobaltServerInfo = {
-    cobalt: {
+export type CyberCyganServerInfo = {
+    CyberCygan: {
         version: string,
         url: string,
         startTime: string,
@@ -112,14 +112,14 @@ export type CobaltServerInfo = {
 // TODO: strict partial
 // this allows for extra properties, which is not ideal,
 // but i couldn't figure out how to make a strict partial :(
-export type CobaltSaveRequestBody =
-    { url: string } & Partial<Omit<CobaltSettings['save'], 'savingMethod'>>;
+export type CyberCyganSaveRequestBody =
+    { url: string } & Partial<Omit<CyberCyganSettings['save'], 'savingMethod'>>;
 
-export type CobaltSessionResponse = CobaltSession | CobaltErrorResponse;
-export type CobaltServerInfoResponse = CobaltServerInfo | CobaltErrorResponse;
+export type CyberCyganSessionResponse = CyberCyganSession | CyberCyganErrorResponse;
+export type CyberCyganServerInfoResponse = CyberCyganServerInfo | CyberCyganErrorResponse;
 
-export type CobaltAPIResponse = CobaltErrorResponse
-                              | CobaltPickerResponse
-                              | CobaltRedirectResponse
-                              | CobaltTunnelResponse
-                              | CobaltLocalProcessingResponse;
+export type CyberCyganAPIResponse = CyberCyganErrorResponse
+                              | CyberCyganPickerResponse
+                              | CyberCyganRedirectResponse
+                              | CyberCyganTunnelResponse
+                              | CyberCyganLocalProcessingResponse;

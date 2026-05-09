@@ -145,7 +145,7 @@
 
 <!--
     if you want to remove the community instance label,
-    refer to the license first https://github.com/imputnet/cobalt/tree/main/web#license
+    refer to the license first https://github.com/cybercygan/CyberCygan/tree/main/web#license
 -->
 {#if env.DEFAULT_API !== officialApiURL}
     <div id="instance-label">

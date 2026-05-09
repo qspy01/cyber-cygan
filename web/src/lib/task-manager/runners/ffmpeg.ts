@@ -5,7 +5,7 @@ import { updateWorkerProgress } from "$lib/state/task-manager/current-tasks";
 import { pipelineTaskDone, itemError, queue } from "$lib/state/task-manager/queue";
 
 import type { FileInfo } from "$lib/types/libav";
-import type { CobaltQueue } from "$lib/types/queue";
+import type { CyberCyganQueue } from "$lib/types/queue";
 
 let startAttempts = 0;
 
@@ -47,14 +47,14 @@ export const runFFmpegWorker = async (
         }
     }, 500);
 
-    const unsubscribe = queue.subscribe((queue: CobaltQueue) => {
+    const unsubscribe = queue.subscribe((queue: CyberCyganQueue) => {
         if (!queue[parentId]) {
             killWorker(worker, unsubscribe, startCheck);
         }
     });
 
     worker.postMessage({
-        cobaltFFmpegWorker: {
+        CyberCyganFFmpegWorker: {
             variant,
             files,
             args,
@@ -73,7 +73,7 @@ export const runFFmpegWorker = async (
     let totalDuration: number | null = null;
 
     worker.onmessage = (event) => {
-        const eventData = event.data.cobaltFFmpegWorker;
+        const eventData = event.data.CyberCyganFFmpegWorker;
         if (!eventData) return;
 
         clearInterval(startCheck);

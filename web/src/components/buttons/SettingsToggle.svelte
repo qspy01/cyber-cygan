@@ -1,13 +1,13 @@
 <script
     lang="ts"
     generics="
-        Context extends Exclude<keyof CobaltSettings, 'schemaVersion'>,
-        Id extends keyof CobaltSettings[Context]
+        Context extends Exclude<keyof CyberCyganSettings, 'schemaVersion'>,
+        Id extends keyof CyberCyganSettings[Context]
     "
 >
     import { hapticSwitch } from "$lib/haptics";
     import settings, { updateSetting } from "$lib/state/settings";
-    import type { CobaltSettings } from "$lib/types/settings";
+    import type { CyberCyganSettings } from "$lib/types/settings";
 
     import Toggle from "$components/misc/Toggle.svelte";
 

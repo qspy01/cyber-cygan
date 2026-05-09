@@ -10,7 +10,7 @@
     let turnstileScript: HTMLElement;
 
     onMount(() => {
-        const sitekey = $cachedInfo?.info?.cobalt?.turnstileSitekey;
+        const sitekey = $cachedInfo?.info?.CyberCygan?.turnstileSitekey;
         if (!sitekey) return;
 
         $turnstileCreated = true;

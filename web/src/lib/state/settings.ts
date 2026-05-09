@@ -4,7 +4,7 @@ import { merge } from 'ts-deepmerge';
 import type {
     PartialSettings,
     AllPartialSettingsWithSchema,
-    CobaltSettings
+    CyberCyganSettings
 } from '../types/settings';
 import { migrateOldSettings } from '../settings/migrate-v7';
 import defaultSettings from '../settings/defaults';
@@ -55,9 +55,9 @@ export const loadFromString = (settings: string): PartialSettings => {
 
 let update: (_: Updater<PartialSettings>) => void;
 
-// deep merge partial type into full CobaltSettings type
+// deep merge partial type into full CyberCyganSettings type
 const mergeWithDefaults = (partial: PartialSettings) => {
-    return merge(defaultSettings, partial) as CobaltSettings;
+    return merge(defaultSettings, partial) as CyberCyganSettings;
 }
 
 export const storedSettings = readable<PartialSettings>(

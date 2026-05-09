@@ -1,6 +1,6 @@
 <script lang="ts">
     import "../app.css";
-    import "../fonts/noto-mono-cobalt.css";
+    import "../fonts/noto-mono-CyberCygan.css";
 
     import "@fontsource/ibm-plex-mono/400.css";
     import "@fontsource/ibm-plex-mono/400-italic.css";
@@ -100,7 +100,7 @@
         <div id="preload" aria-hidden="true">??</div>
     {/if}
     <div
-        id="cobalt"
+        id="CyberCygan"
         class:loaded={browser}
         data-chrome={device.browser.chrome}
         data-iphone={device.is.iPhone}
@@ -127,7 +127,7 @@
 </div>
 
 <style>
-    #cobalt {
+    #CyberCygan {
         height: 100%;
         width: 100%;
         display: grid;
@@ -142,7 +142,7 @@
 
     /* add padding for notch / dynamic island in landscape */
     @media screen and (orientation: landscape) and (min-width: 535px) {
-        #cobalt[data-iphone="true"] {
+        #CyberCygan[data-iphone="true"] {
             grid-template-columns:
                 calc(
                     var(--sidebar-width) + var(--sidebar-inner-padding) * 2 +
@@ -151,7 +151,7 @@
                 1fr;
         }
 
-        #cobalt[data-iphone="true"] #content {
+        #CyberCygan[data-iphone="true"] #content {
             padding-right: env(safe-area-inset-right);
         }
     }
@@ -188,7 +188,7 @@
             --sidebar-highlight: var(--primary);
         }
 
-        #cobalt {
+        #CyberCygan {
             display: grid;
             grid-template-columns: unset;
             grid-template-rows:

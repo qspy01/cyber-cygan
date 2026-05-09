@@ -25,14 +25,14 @@ const variables = {
 
 const contacts = {
     discord: "https://discord.gg/pQPt8HBUPu",
-    twitter: "https://x.com/justusecobalt",
-    github: "https://github.com/imputnet/cobalt",
-    bluesky: "https://bsky.app/profile/cobalt.tools",
-    telegram_ru: "https://t.me/justusecobalt_ru",
+    twitter: "https://x.com/justuseCyberCygan",
+    github: "https://github.com/cybercygan/CyberCygan",
+    bluesky: "https://bsky.app/profile/CyberCygan.tools",
+    telegram_ru: "https://t.me/justuseCyberCygan_ru",
 }
 
 const partners = {
-    royalehosting: "https://royalehosting.net/?partner=cobalt",
+    royalehosting: "https://royalehosting.net/?partner=CyberCygan",
 }
 
 const donate = {
@@ -57,12 +57,12 @@ const siriShortcuts = {
 };
 
 const docs = {
-    instanceHosting: "https://github.com/imputnet/cobalt/blob/main/docs/run-an-instance.md",
-    webLicense: "https://github.com/imputnet/cobalt/blob/main/web/LICENSE",
-    apiLicense: "https://github.com/imputnet/cobalt/blob/main/api/LICENSE",
+    instanceHosting: "https://github.com/cybercygan/CyberCygan/blob/main/docs/run-an-instance.md",
+    webLicense: "https://github.com/cybercygan/CyberCygan/blob/main/web/LICENSE",
+    apiLicense: "https://github.com/cybercygan/CyberCygan/blob/main/api/LICENSE",
 };
 
-const officialApiURL = "https://api.cobalt.tools";
+const officialApiURL = "https://api.CyberCygan.tools";
 
 export { donate, officialApiURL, contacts, partners, siriShortcuts, docs };
 export default variables;

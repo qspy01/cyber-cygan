@@ -10,11 +10,11 @@ import { createDialog } from "$lib/state/dialogs";
 import { downloadButtonState } from "$lib/state/omnibox";
 import { createSavePipeline } from "$lib/task-manager/queue";
 
-import type { CobaltSaveRequestBody } from "$lib/types/api";
+import type { CyberCyganSaveRequestBody } from "$lib/types/api";
 
 type SavingHandlerArgs = {
     url?: string,
-    request?: CobaltSaveRequestBody,
+    request?: CyberCyganSaveRequestBody,
     oldTaskId?: string
 }
 
@@ -96,7 +96,7 @@ export const savingHandler = async ({ url, request, oldTaskId }: SavingHandlerAr
     if (response.status === "tunnel") {
         downloadButtonState.set("check");
 
-        const probeResult = await API.probeCobaltTunnel(response.url);
+        const probeResult = await API.probeCyberCyganTunnel(response.url);
 
         if (probeResult === 200) {
             downloadButtonState.set("done");

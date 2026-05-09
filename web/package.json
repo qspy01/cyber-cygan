@@ -1,6 +1,8 @@
 {
-    "name": "@imput/cobalt-web",
+    "name": "cybercygan-web",
     "version": "11.7",
+    "description": "CyberCygan Web",
+    "author": "cybercygan",
     "type": "module",
     "private": true,
     "scripts": {
@@ -17,12 +19,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/imputnet/cobalt.git"
+        "url": "git+https://github.com/cybercygan/CyberCygan.git"
     },
     "bugs": {
-        "url": "https://github.com/imputnet/cobalt/issues"
+        "url": "https://github.com/cybercygan/CyberCygan/issues"
     },
-    "homepage": "https://cobalt.tools/",
+    "homepage": "https://github.com/cybercygan/CyberCygan#readme",
     "devDependencies": {
         "@eslint/js": "^9.39.4",
         "@fontsource/ibm-plex-mono": "^5.2.7",

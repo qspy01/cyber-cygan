@@ -1,7 +1,7 @@
 import { AbstractStorage } from "./storage";
 import { uuid } from "$lib/util";
 
-const COBALT_PROCESSING_DIR = "cobalt-processing-data";
+const CYBERCYGAN_PROCESSING_DIR = "CyberCygan-processing-data";
 
 export class OPFSStorage extends AbstractStorage {
     #root;
@@ -19,11 +19,11 @@ export class OPFSStorage extends AbstractStorage {
 
     static async init() {
         const root = await navigator.storage.getDirectory();
-        const cobaltDir = await root.getDirectoryHandle(COBALT_PROCESSING_DIR, { create: true });
-        const handle = await cobaltDir.getFileHandle(uuid(), { create: true });
+        const CyberCyganDir = await root.getDirectoryHandle(CYBERCYGAN_PROCESSING_DIR, { create: true });
+        const handle = await CyberCyganDir.getFileHandle(uuid(), { create: true });
         const reader = await handle.createSyncAccessHandle();
 
-        return new this(cobaltDir, handle, reader);
+        return new this(CyberCyganDir, handle, reader);
     }
 
     async res() {
@@ -84,8 +84,8 @@ export const removeFromFileStorage = async (filename: string) => {
         const root = await navigator.storage.getDirectory();
 
         try {
-            const cobaltDir = await root.getDirectoryHandle(COBALT_PROCESSING_DIR);
-            await cobaltDir.removeEntry(filename);
+            const CyberCyganDir = await root.getDirectoryHandle(CYBERCYGAN_PROCESSING_DIR);
+            await CyberCyganDir.removeEntry(filename);
         } catch {
             // catch and ignore
         }
@@ -96,7 +96,7 @@ export const clearFileStorage = async () => {
     if (await OPFSStorage.isAvailable()) {
         const root = await navigator.storage.getDirectory();
         try {
-            await root.removeEntry(COBALT_PROCESSING_DIR, { recursive: true });
+            await root.removeEntry(CYBERCYGAN_PROCESSING_DIR, { recursive: true });
         } catch {
             // ignore the error because the dir might be missing and that's okay!
         }

@@ -1,7 +1,7 @@
 185.167.99.145.sslip.io {
-    reverse_proxy cobalt-web:80
+    reverse_proxy cybercygan-web:80
 }
 
 api.185.167.99.145.sslip.io {
-    reverse_proxy cobalt-api:9000
+    reverse_proxy cybercygan-api:9000
 }

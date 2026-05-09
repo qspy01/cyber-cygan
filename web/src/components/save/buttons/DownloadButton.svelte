@@ -5,7 +5,7 @@
     import { savingHandler } from "$lib/api/saving-handler";
     import { downloadButtonState } from "$lib/state/omnibox";
 
-    import type { CobaltDownloadButtonState } from "$lib/types/omnibox";
+    import type { CyberCyganDownloadButtonState } from "$lib/types/omnibox";
 
     export let url: string;
     export let disabled = false;
@@ -17,7 +17,7 @@
     type DownloadButtonState = "idle" | "think" | "check" | "done" | "error";
 
     const unsubscribe = downloadButtonState.subscribe(
-        (state: CobaltDownloadButtonState) => {
+        (state: CyberCyganDownloadButtonState) => {
             disabled = state !== "idle";
             loading = state === "think" || state === "check";
 

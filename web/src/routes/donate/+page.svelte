@@ -14,11 +14,11 @@
 
 <svelte:head>
     <title>
-        {$t("tabs.donate")} ~ {$t("general.cobalt")}
+        {$t("tabs.donate")} ~ {$t("general.CyberCygan")}
     </title>
     <meta
         property="og:title"
-        content="{$t("tabs.donate")} ~ {$t("general.cobalt")}"
+        content="{$t("tabs.donate")} ~ {$t("general.CyberCygan")}"
     />
 </svelte:head>
 

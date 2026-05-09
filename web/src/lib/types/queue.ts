@@ -1,42 +1,42 @@
-import type { CobaltSaveRequestBody } from "$lib/types/api";
-import type { CobaltPipelineItem, CobaltPipelineResultFileType } from "$lib/types/workers";
+import type { CyberCyganSaveRequestBody } from "$lib/types/api";
+import type { CyberCyganPipelineItem, CyberCyganPipelineResultFileType } from "$lib/types/workers";
 
 export type UUID = string;
 
-type CobaltQueueBaseItem = {
+type CyberCyganQueueBaseItem = {
     id: UUID,
-    pipeline: CobaltPipelineItem[],
+    pipeline: CyberCyganPipelineItem[],
     canRetry?: boolean,
-    originalRequest?: CobaltSaveRequestBody,
+    originalRequest?: CyberCyganSaveRequestBody,
     filename: string,
     mimeType?: string,
-    mediaType: CobaltPipelineResultFileType,
+    mediaType: CyberCyganPipelineResultFileType,
 };
 
-type CobaltQueueItemWaiting = CobaltQueueBaseItem & {
+type CyberCyganQueueItemWaiting = CyberCyganQueueBaseItem & {
     state: "waiting",
 };
 
-export type CobaltQueueItemRunning = CobaltQueueBaseItem & {
+export type CyberCyganQueueItemRunning = CyberCyganQueueBaseItem & {
     state: "running",
     pipelineResults: Record<UUID, File>,
 };
 
-type CobaltQueueItemDone = CobaltQueueBaseItem & {
+type CyberCyganQueueItemDone = CyberCyganQueueBaseItem & {
     state: "done",
     resultFile: File,
 };
 
-type CobaltQueueItemError = CobaltQueueBaseItem & {
+type CyberCyganQueueItemError = CyberCyganQueueBaseItem & {
     state: "error",
     errorCode: string,
 };
 
-export type CobaltQueueItem = CobaltQueueItemWaiting
-                            | CobaltQueueItemRunning
-                            | CobaltQueueItemDone
-                            | CobaltQueueItemError;
+export type CyberCyganQueueItem = CyberCyganQueueItemWaiting
+                            | CyberCyganQueueItemRunning
+                            | CyberCyganQueueItemDone
+                            | CyberCyganQueueItemError;
 
-export type CobaltQueue = {
-    [id: UUID]: CobaltQueueItem,
+export type CyberCyganQueue = {
+    [id: UUID]: CyberCyganQueueItem,
 };

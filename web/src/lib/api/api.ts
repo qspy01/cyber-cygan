@@ -9,7 +9,7 @@ import cachedInfo from "$lib/state/server-info";
 import { getServerInfo } from "$lib/api/server-info";
 
 import type { Optional } from "$lib/types/generic";
-import type { CobaltAPIResponse, CobaltErrorResponse, CobaltSaveRequestBody } from "$lib/types/api";
+import type { CyberCyganAPIResponse, CyberCyganErrorResponse, CyberCyganSaveRequestBody } from "$lib/types/api";
 
 const waitForTurnstile = async () => {
     return await new Promise((resolve, reject) => {
@@ -47,7 +47,7 @@ const getAuthorization = async () => {
                 error: {
                     code: "error.captcha_too_long"
                 }
-            } as CobaltErrorResponse;
+            } as CyberCyganErrorResponse;
         }
     }
 
@@ -64,7 +64,7 @@ const getAuthorization = async () => {
     }
 }
 
-const request = async (requestBody: CobaltSaveRequestBody, justRetried = false) => {
+const request = async (requestBody: CyberCyganSaveRequestBody, justRetried = false) => {
     await getServerInfo();
 
     const getCachedInfo = get(cachedInfo);
@@ -75,7 +75,7 @@ const request = async (requestBody: CobaltSaveRequestBody, justRetried = false) 
             error: {
                 code: "error.api.unreachable"
             }
-        } as CobaltErrorResponse;
+        } as CyberCyganErrorResponse;
     }
 
     const api = currentApiURL();
@@ -93,7 +93,7 @@ const request = async (requestBody: CobaltSaveRequestBody, justRetried = false) 
         }
     }
 
-    const response: Optional<CobaltAPIResponse> = await fetch(api, {
+    const response: Optional<CyberCyganAPIResponse> = await fetch(api, {
         method: "POST",
         redirect: "manual",
         signal: AbortSignal.timeout(20000),
@@ -112,7 +112,7 @@ const request = async (requestBody: CobaltSaveRequestBody, justRetried = false) 
                 error: {
                     code: "error.api.timed_out"
                 }
-            } as CobaltErrorResponse;
+            } as CyberCyganErrorResponse;
         }
     });
 
@@ -129,7 +129,7 @@ const request = async (requestBody: CobaltSaveRequestBody, justRetried = false) 
     return response;
 }
 
-const probeCobaltTunnel = async (url: string) => {
+const probeCyberCyganTunnel = async (url: string) => {
     const request = await fetch(`${url}&p=1`).catch(() => {});
     if (request?.status === 200) {
         return request?.status;
@@ -139,5 +139,5 @@ const probeCobaltTunnel = async (url: string) => {
 
 export default {
     request,
-    probeCobaltTunnel,
+    probeCyberCyganTunnel,
 }

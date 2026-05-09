@@ -3,41 +3,41 @@ import type { UUID } from "./queue";
 
 export const resultFileTypes = ["video", "audio", "image", "file"] as const;
 
-export type CobaltPipelineResultFileType = typeof resultFileTypes[number];
+export type CyberCyganPipelineResultFileType = typeof resultFileTypes[number];
 
-export type CobaltWorkerProgress = {
+export type CyberCyganWorkerProgress = {
     percentage?: number,
     speed?: number,
     size: number,
 };
 
-type CobaltFFmpegWorkerArgs = {
+type CyberCyganFFmpegWorkerArgs = {
     files: File[],
     ffargs: string[],
     output: FileInfo,
 };
 
-type CobaltPipelineItemBase = {
+type CyberCyganPipelineItemBase = {
     workerId: UUID,
     parentId: UUID,
     dependsOn?: UUID[],
 };
 
-type CobaltRemuxPipelineItem = CobaltPipelineItemBase & {
+type CyberCyganRemuxPipelineItem = CyberCyganPipelineItemBase & {
     worker: "remux",
-    workerArgs: CobaltFFmpegWorkerArgs,
+    workerArgs: CyberCyganFFmpegWorkerArgs,
 }
 
-type CobaltEncodePipelineItem = CobaltPipelineItemBase & {
+type CyberCyganEncodePipelineItem = CyberCyganPipelineItemBase & {
     worker: "encode",
-    workerArgs: CobaltFFmpegWorkerArgs,
+    workerArgs: CyberCyganFFmpegWorkerArgs,
 }
 
-type CobaltFetchPipelineItem = CobaltPipelineItemBase & {
+type CyberCyganFetchPipelineItem = CyberCyganPipelineItemBase & {
     worker: "fetch",
     workerArgs: { url: string },
 }
 
-export type CobaltPipelineItem = CobaltEncodePipelineItem
-                               | CobaltRemuxPipelineItem
-                               | CobaltFetchPipelineItem;
+export type CyberCyganPipelineItem = CyberCyganEncodePipelineItem
+                               | CyberCyganRemuxPipelineItem
+                               | CyberCyganFetchPipelineItem;

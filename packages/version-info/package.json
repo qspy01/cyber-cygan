@@ -1,18 +1,18 @@
 {
-    "name": "@imput/version-info",
+    "name": "@cybercygan/version-info",
     "version": "1.0.1",
-    "description": "helper package for cobalt that provides commit info & version from package file.",
+    "description": "helper package for CyberCygan that provides commit info & version from package file.",
     "main": "index.js",
     "types": "index.d.ts",
     "type": "module",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/imputnet/cobalt.git"
+        "url": "git+https://github.com/cybercygan/CyberCygan.git"
     },
-    "author": "imput",
+    "author": "cybercygan",
     "license": "AGPL-3.0",
     "bugs": {
-        "url": "https://github.com/imputnet/cobalt/issues"
+        "url": "https://github.com/cybercygan/CyberCygan/issues"
     },
-    "homepage": "https://github.com/imputnet/cobalt#readme"
+    "homepage": "https://github.com/cybercygan/CyberCygan#readme"
 }

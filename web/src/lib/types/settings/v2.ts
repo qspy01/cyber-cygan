@@ -9,7 +9,7 @@ export const videoQualityOptions = ["max", "2160", "1440", "1080", "720", "480",
 export const youtubeVideoCodecOptions = ["h264", "av1", "vp9"] as const;
 export const savingMethodOptions = ["ask", "download", "share", "copy"] as const;
 
-type CobaltSettingsAppearance = {
+type CyberCyganSettingsAppearance = {
     theme: typeof themeOptions[number],
     language: keyof typeof languages,
     autoLanguage: boolean,
@@ -17,16 +17,16 @@ type CobaltSettingsAppearance = {
     reduceTransparency: boolean,
 };
 
-type CobaltSettingsAdvanced = {
+type CyberCyganSettingsAdvanced = {
     debug: boolean,
 };
 
-type CobaltSettingsPrivacy = {
+type CyberCyganSettingsPrivacy = {
     alwaysProxy: boolean,
     disableAnalytics: boolean,
 };
 
-type CobaltSettingsProcessing = {
+type CyberCyganSettingsProcessing = {
     allowDefaultOverride: boolean,
     customInstanceURL: string,
     enableCustomInstances: boolean,
@@ -34,7 +34,7 @@ type CobaltSettingsProcessing = {
     seenOverrideWarning: boolean,
 }
 
-type CobaltSettingsSaveV2 = {
+type CyberCyganSettingsSaveV2 = {
     audioFormat: typeof audioFormatOptions[number],
     audioBitrate: typeof audioBitrateOptions[number],
     disableMetadata: boolean,
@@ -50,11 +50,11 @@ type CobaltSettingsSaveV2 = {
     youtubeHLS: boolean,
 };
 
-export type CobaltSettingsV2 = {
+export type CyberCyganSettingsV2 = {
     schemaVersion: 2,
-    advanced: CobaltSettingsAdvanced,
-    appearance: CobaltSettingsAppearance,
-    save: CobaltSettingsSaveV2,
-    privacy: CobaltSettingsPrivacy,
-    processing: CobaltSettingsProcessing,
+    advanced: CyberCyganSettingsAdvanced,
+    appearance: CyberCyganSettingsAppearance,
+    save: CyberCyganSettingsSaveV2,
+    privacy: CyberCyganSettingsPrivacy,
+    processing: CyberCyganSettingsProcessing,
 };

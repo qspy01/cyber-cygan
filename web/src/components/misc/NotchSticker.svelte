@@ -1,9 +1,9 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    import CobaltSticker from "$components/icons/CobaltSticker.svelte";
+    import CyberCyganSticker from "$components/icons/CyberCyganSticker.svelte";
 
-    // please add a source link (https://github.com/imputnet/cobalt) if you use this implementation
+    // please add a source link (https://github.com/cybercygan/CyberCygan) if you use this implementation
     // i spent 4 hours switching between simulators and devices to get the best way to do this
 
     $: safeAreaTop = 0;
@@ -61,13 +61,13 @@
 </script>
 
 {#if state !== "hidden"}
-    <div id="cobalt-notch-sticker" aria-hidden="true" class={state}>
-        <CobaltSticker />
+    <div id="CyberCygan-notch-sticker" aria-hidden="true" class={state}>
+        <CyberCyganSticker />
     </div>
 {/if}
 
 <style>
-    #cobalt-notch-sticker {
+    #CyberCygan-notch-sticker {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -77,51 +77,51 @@
         z-index: 999;
     }
 
-    #cobalt-notch-sticker.island {
+    #CyberCygan-notch-sticker.island {
         padding-top: 15px;
     }
 
-    #cobalt-notch-sticker.notch {
+    #CyberCygan-notch-sticker.notch {
         padding-top: 2px;
     }
 
-    #cobalt-notch-sticker.sixteen-pro-max {
+    #CyberCygan-notch-sticker.sixteen-pro-max {
         padding-top: 12px;
     }
 
-    #cobalt-notch-sticker.notch.x :global(svg) {
+    #CyberCygan-notch-sticker.notch.x :global(svg) {
         height: 28px;
     }
 
-    #cobalt-notch-sticker :global(svg) {
+    #CyberCygan-notch-sticker :global(svg) {
         width: 100px;
         height: 30px;
     }
 
     /* regular iphone size, larger text display mode */
     @media screen and (max-width: 350px) {
-        #cobalt-notch-sticker.notch :global(svg) {
+        #CyberCygan-notch-sticker.notch :global(svg) {
             height: 24px;
         }
 
-        #cobalt-notch-sticker.island {
+        #CyberCygan-notch-sticker.island {
             padding-top: 9px;
         }
     }
 
     /* regular & plus iphone size, dynamic island, larger text display mode */
     @media screen and (max-width: 375px) {
-        #cobalt-notch-sticker.island :global(svg) {
+        #CyberCygan-notch-sticker.island :global(svg) {
             height: 26px;
         }
 
-        #cobalt-notch-sticker.island {
+        #CyberCygan-notch-sticker.island {
             padding-top: 11px;
         }
     }
 
     @media screen and (orientation: landscape) {
-        #cobalt-notch-sticker {
+        #CyberCygan-notch-sticker {
             display: none;
         }
     }

@@ -80,11 +80,11 @@
 
 <svelte:head>
     <title>
-        {$t("tabs.updates")} ~ {$t("general.cobalt")}
+        {$t("tabs.updates")} ~ {$t("general.CyberCygan")}
     </title>
     <meta
         property="og:title"
-        content="{$t("tabs.updates")} ~ {$t("general.cobalt")}"
+        content="{$t("tabs.updates")} ~ {$t("general.CyberCygan")}"
     />
 </svelte:head>
 

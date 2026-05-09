@@ -16,7 +16,7 @@ const fetchFile = async (url: string) => {
             await fetchFile(url);
         } else {
             self.postMessage({
-                cobaltFetchWorker: {
+                CyberCyganFetchWorker: {
                     error: code,
                 }
             });
@@ -64,7 +64,7 @@ const fetchFile = async (url: string) => {
 
             if (expectedSize) {
                 self.postMessage({
-                    cobaltFetchWorker: {
+                    CyberCyganFetchWorker: {
                         progress: Math.round((receivedBytes / expectedSize) * 100),
                         size: receivedBytes,
                     }
@@ -83,7 +83,7 @@ const fetchFile = async (url: string) => {
         }
 
         self.postMessage({
-            cobaltFetchWorker: {
+            CyberCyganFetchWorker: {
                 result: file
             }
         });
@@ -99,8 +99,8 @@ const fetchFile = async (url: string) => {
 }
 
 self.onmessage = async (event: MessageEvent) => {
-    if (event.data.cobaltFetchWorker) {
-        await fetchFile(event.data.cobaltFetchWorker.url);
+    if (event.data.CyberCyganFetchWorker) {
+        await fetchFile(event.data.CyberCyganFetchWorker.url);
         self.close();
     }
 }

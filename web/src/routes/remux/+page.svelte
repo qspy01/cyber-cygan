@@ -29,10 +29,10 @@
 </script>
 
 <svelte:head>
-    <title>{$t("tabs.remux")} ~ {$t("general.cobalt")}</title>
+    <title>{$t("tabs.remux")} ~ {$t("general.CyberCygan")}</title>
     <meta
         property="og:title"
-        content="{$t('tabs.remux')} ~ {$t('general.cobalt')}"
+        content="{$t('tabs.remux')} ~ {$t('general.CyberCygan')}"
     />
 </svelte:head>
 

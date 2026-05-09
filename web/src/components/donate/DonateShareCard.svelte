@@ -14,10 +14,10 @@
     import IconBrandTwitter from "@tabler/icons-svelte/IconBrandTwitter.svelte";
     import IconMoodSmileBeam from "@tabler/icons-svelte/IconMoodSmileBeam.svelte";
 
-    import CobaltQr from "$components/icons/CobaltQR.svelte";
+    import CyberCyganQr from "$components/icons/CyberCyganQR.svelte";
     import CopyIcon from "$components/misc/CopyIcon.svelte";
 
-    const cobaltUrl = "https://cobalt.tools/";
+    const CyberCyganUrl = "https://CyberCygan.tools/";
 
     let copied = false;
 
@@ -45,7 +45,7 @@
                 `a11y.donate.share.qr.${expanded ? "collapse" : "expand"}`
             )}
         >
-            <CobaltQr />
+            <CyberCyganQr />
         </button>
         <div id="action-buttons">
             <button
@@ -53,7 +53,7 @@
                 class="action-button"
                 on:click={async () => {
                     if (!copied) {
-                        copyURL(cobaltUrl);
+                        copyURL(CyberCyganUrl);
                         hapticConfirm();
                         copied = true;
                     }
@@ -70,7 +70,7 @@
                 <button
                     id="action-button-share"
                     class="action-button"
-                    on:click={async () => shareURL(cobaltUrl)}
+                    on:click={async () => shareURL(CyberCyganUrl)}
                 >
                     <div class="action-button-icon">
                         <IconShare2 />
@@ -108,7 +108,7 @@
         class="donate-card-subtitle share-footer-link"
         class:centered={expanded}
     >
-        cobalt.tools
+        CyberCygan.tools
     </div>
 </DonateCardContainer>
 

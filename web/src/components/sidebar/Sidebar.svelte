@@ -4,7 +4,7 @@
     import { t } from "$lib/i18n/translations";
     import { defaultNavPage } from "$lib/subnav";
 
-    import CobaltLogo from "$components/sidebar/CobaltLogo.svelte";
+    import CyberCyganLogo from "$components/sidebar/CyberCyganLogo.svelte";
     import SidebarTab from "$components/sidebar/SidebarTab.svelte";
 
     import IconDownload from "@tabler/icons-svelte/IconDownload.svelte";
@@ -28,7 +28,7 @@
 <svelte:window bind:innerWidth={screenWidth} />
 
 <nav id="sidebar" aria-label={$t("a11y.tabs.tab_panel")}>
-    <CobaltLogo />
+    <CyberCyganLogo />
     <div id="sidebar-tabs" role="tablist">
         <div id="sidebar-actions" class="sidebar-inner-container">
             <SidebarTab name="save" path="/" icon={IconDownload} />

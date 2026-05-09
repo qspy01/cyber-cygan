@@ -1,13 +1,13 @@
 <script>
-    import IconCobalt from "$components/icons/Cobalt.svelte";
+    import IconCyberCygan from "$components/icons/CyberCygan.svelte";
 </script>
 
-<div id="cobalt-logo">
-    <IconCobalt />
+<div id="CyberCygan-logo">
+    <IconCyberCygan />
 </div>
 
 <style>
-    #cobalt-logo {
+    #CyberCygan-logo {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -17,12 +17,12 @@
         padding-bottom: calc(var(--sidebar-tab-padding) * 2 - var(--sidebar-inner-padding));
     }
 
-    #cobalt-logo :global(path) {
+    #CyberCygan-logo :global(path) {
         fill: var(--sidebar-highlight);
     }
 
     @media screen and (max-width: 535px) {
-        #cobalt-logo {
+        #CyberCygan-logo {
             display: none;
         }
     }

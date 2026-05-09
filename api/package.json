@@ -3,15 +3,15 @@
     "description": "CyberCygan API",
     "version": "11.7.1",
     "author": "cybercygan",
-    "exports": "./src/cobalt.ts",
+    "exports": "./src/cybercygan.ts",
     "type": "module",
     "engines": {
         "node": ">=18.17"
     },
     "scripts": {
-        "dev": "tsx watch src/cobalt.ts",
+        "dev": "tsx watch src/cybercygan.ts",
         "build": "tsc",
-        "start": "node dist/cobalt.js",
+        "start": "node dist/cybercygan.js",
         "test": "tsx src/util/test.ts",
         "token:jwt": "node src/util/generate-jwt-secret"
     },

@@ -8,7 +8,7 @@ export const turnstileCreated = writable(false);
 export const turnstileEnabled = derived(
     [settings, cachedInfo],
     ([$settings, $cachedInfo]) => {
-        return !!$cachedInfo?.info?.cobalt?.turnstileSitekey &&
+        return !!$cachedInfo?.info?.CyberCygan?.turnstileSitekey &&
             !(
                 $settings.processing.enableCustomApiKey &&
                 $settings.processing.customApiKey.length > 0

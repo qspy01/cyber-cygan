@@ -2,10 +2,10 @@ import type { RecursivePartial } from "$lib/types/generic";
 import type {
     PartialSettings,
     AllPartialSettingsWithSchema,
-    CobaltSettingsV3,
-    CobaltSettingsV4,
-    CobaltSettingsV5,
-    CobaltSettingsV6,
+    CyberCyganSettingsV3,
+    CyberCyganSettingsV4,
+    CyberCyganSettingsV5,
+    CyberCyganSettingsV6,
 } from "$lib/types/settings";
 import { getBrowserLanguage } from "$lib/settings/audio-sub-language";
 
@@ -13,7 +13,7 @@ type Migrator = (s: AllPartialSettingsWithSchema) => AllPartialSettingsWithSchem
 
 const migrations: Record<number, Migrator> = {
     [3]: (settings: AllPartialSettingsWithSchema) => {
-        const out = settings as RecursivePartial<CobaltSettingsV3>;
+        const out = settings as RecursivePartial<CyberCyganSettingsV3>;
         out.schemaVersion = 3;
 
         if (settings?.save && "youtubeDubBrowserLang" in settings.save) {
@@ -28,7 +28,7 @@ const migrations: Record<number, Migrator> = {
     },
 
     [4]: (settings: AllPartialSettingsWithSchema) => {
-        const out = settings as RecursivePartial<CobaltSettingsV4>;
+        const out = settings as RecursivePartial<CyberCyganSettingsV4>;
         out.schemaVersion = 4;
 
         if (settings?.processing) {
@@ -44,7 +44,7 @@ const migrations: Record<number, Migrator> = {
     },
 
     [5]: (settings: AllPartialSettingsWithSchema) => {
-        const out = settings as RecursivePartial<CobaltSettingsV5>;
+        const out = settings as RecursivePartial<CyberCyganSettingsV5>;
         out.schemaVersion = 5;
 
         if (settings?.save) {
@@ -83,7 +83,7 @@ const migrations: Record<number, Migrator> = {
     },
 
     [6]: (settings: AllPartialSettingsWithSchema) => {
-        const out = settings as RecursivePartial<CobaltSettingsV6>;
+        const out = settings as RecursivePartial<CyberCyganSettingsV6>;
         out.schemaVersion = 6;
 
         if (settings?.save) {

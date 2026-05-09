@@ -1,26 +1,26 @@
 services:
-  cobalt-api:
-    image: ghcr.io/imputnet/cobalt:latest
+  cybercygan-api:
+    image: ghcr.io/cybercygan/cybercygan-api:latest
     restart: always
-    container_name: cobalt-api
+    container_name: cybercygan-api
     environment:
       - API_URL=https://api.185.167.99.145.sslip.io/
-      - API_NAME=cobalt-instance
-      - REDIS_HOST=cobalt-redis
+      - API_NAME=cybercygan-instance
+      - REDIS_HOST=cybercygan-redis
     depends_on:
-      - cobalt-redis
+      - cybercygan-redis
 
-  cobalt-web:
-    image: ghcr.io/imputnet/cobalt-web:latest
+  cybercygan-web:
+    image: ghcr.io/cybercygan/cybercygan-web:latest
     restart: always
-    container_name: cobalt-web
+    container_name: cybercygan-web
     environment:
       - API_URL=https://api.185.167.99.145.sslip.io/
 
-  cobalt-redis:
+  cybercygan-redis:
     image: redis:alpine
     restart: always
-    container_name: cobalt-redis
+    container_name: cybercygan-redis
 
   caddy:
     image: caddy:latest
@@ -34,8 +34,8 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
-      - cobalt-api
-      - cobalt-web
+      - cybercygan-api
+      - cybercygan-web
 
 volumes:
   caddy_data:

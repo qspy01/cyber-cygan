@@ -19,7 +19,7 @@
 
         if ($cachedInfo) {
             loaded = true;
-            services = $cachedInfo.info.cobalt.services;
+            services = $cachedInfo.info.CyberCygan.services;
         }
     };
 

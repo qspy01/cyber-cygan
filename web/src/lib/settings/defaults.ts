@@ -1,8 +1,8 @@
 import { device } from "$lib/device";
 import { defaultLocale } from "$lib/i18n/translations";
-import type { CobaltSettings } from "$lib/types/settings";
+import type { CyberCyganSettings } from "$lib/types/settings";
 
-const defaultSettings: CobaltSettings = {
+const defaultSettings: CyberCyganSettings = {
     schemaVersion: 6,
     advanced: {
         debug: false,

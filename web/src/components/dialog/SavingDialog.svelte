@@ -11,7 +11,7 @@
         shareFile,
     } from "$lib/download";
 
-    import type { CobaltFileUrlType } from "$lib/types/api";
+    import type { CyberCyganFileUrlType } from "$lib/types/api";
 
     import DialogContainer from "$components/dialog/DialogContainer.svelte";
 
@@ -32,7 +32,7 @@
 
     export let url: string = "";
     export let file: File | undefined = undefined;
-    export let urlType: CobaltFileUrlType | undefined = undefined;
+    export let urlType: CyberCyganFileUrlType | undefined = undefined;
 
     let close: () => void;
 
