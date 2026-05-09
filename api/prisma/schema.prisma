@@ -29,12 +29,12 @@ model User {
   plan         Plan?           @relation(fields: [planId], references: [id])
   createdAt    DateTime        @default(now())
   updatedAt    DateTime        @updatedAt
-  sessions  Session[]
-  overrides QuotaOverride[]
-  activities Activity[]
-  }
+  sessions     Session[]
+  overrides    QuotaOverride[]
+  activities   Activity[]
+}
 
-  model Plan {
+model Plan {
   id               String   @id @default(uuid())
   name             String   @unique
   description      String?
@@ -44,9 +44,9 @@ model User {
   users            User[]
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-  }
+}
 
-  model QuotaOverride {
+model QuotaOverride {
   id        String   @id @default(uuid())
   userId    String
   user      User     @relation(fields: [userId], references: [id])
@@ -56,18 +56,18 @@ model User {
   updatedAt DateTime @updatedAt
 
   @@unique([userId, metric])
-  }
+}
 
-  model Activity {
+model Activity {
   id        String   @id @default(uuid())
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   mediaUrl  String
   status    String
   createdAt DateTime @default(now())
-  }
+}
 
-  model Session {
+model Session {
   id           String   @id @default(uuid())
   userId       String
   user         User     @relation(fields: [userId], references: [id])
