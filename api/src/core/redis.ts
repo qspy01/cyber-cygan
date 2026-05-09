@@ -3,12 +3,22 @@ import { env } from "../config.js";
 
 let client: RedisClientType | null = null;
 const memoryFallback = new Set<string>();
+let memoryFallbackWarningLogged = false;
 
 export const initClient = async () => {
     if (!client && env.redisURL) {
-        client = createClient({ url: env.redisURL });
-        client.on('error', (err) => console.error('Redis Client Error', err));
-        await client.connect();
+        try {
+            client = createClient({ url: env.redisURL });
+            client.on('error', (err) => console.error('Redis Client Error', err));
+            await client.connect();
+        } catch (error) {
+            console.error('Failed to connect to Redis:', error);
+            client = null;
+            throw error;
+        }
+    } else if (!client && !env.redisURL && !memoryFallbackWarningLogged) {
+        console.warn('WARNING: API_REDIS_URL not provided, using memory fallback for tokens. This should only be used in development.');
+        memoryFallbackWarningLogged = true;
     }
 };
 

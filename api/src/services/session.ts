@@ -16,7 +16,7 @@ export const generateAccessToken = async (userId: string) => {
 
 export const generateRefreshToken = async (userId: string, deviceName?: string, ipAddress?: string) => {
     const token = randomUUID();
-    const expiresInDays = 7;
+    const expiresInDays = env.refreshTokenLifetimeDays as number;
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + expiresInDays);
 

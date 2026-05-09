@@ -3,6 +3,14 @@ import jwt from 'jsonwebtoken';
 import { env } from '../config.js';
 import { isTokenRevoked } from '../core/redis.js';
 
+declare global {
+    namespace Express {
+        interface Request {
+            user?: { id: string };
+        }
+    }
+}
+
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const authHeader = req.headers.authorization;
@@ -25,10 +33,15 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
 
         const decoded = jwt.verify(token, env.jwtSecret as string) as jwt.JwtPayload;
         
-        (req as any).user = { id: decoded.userId };
+        req.user = { id: decoded.userId };
         
         next();
     } catch (error) {
-        res.status(401).json({ error: 'Unauthorized: Invalid token' });
+        if (error instanceof Error && (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError' || error.name === 'NotBeforeError')) {
+            res.status(401).json({ error: 'Unauthorized: Invalid token' });
+        } else {
+            console.error('Auth middleware error:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
     }
 };

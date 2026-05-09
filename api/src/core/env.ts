@@ -102,6 +102,7 @@ export const loadEnvs = (env = process.env) => {
         turnstileSecret: env.TURNSTILE_SECRET,
         jwtSecret: env.JWT_SECRET,
         jwtLifetime: env.JWT_EXPIRY || 120,
+        refreshTokenLifetimeDays: (env.REFRESH_TOKEN_LIFETIME_DAYS && parseInt(env.REFRESH_TOKEN_LIFETIME_DAYS)) || 7,
 
         sessionEnabled: env.TURNSTILE_SITEKEY
                             && env.TURNSTILE_SECRET
