@@ -3,14 +3,16 @@
     "description": "save what you love",
     "version": "11.7.1",
     "author": "imput",
-    "exports": "./src/cobalt.js",
+    "exports": "./src/cobalt.ts",
     "type": "module",
     "engines": {
         "node": ">=18.17"
     },
     "scripts": {
-        "start": "node src/cobalt",
-        "test": "node src/util/test",
+        "dev": "tsx watch src/cobalt.ts",
+        "build": "tsc",
+        "start": "node dist/cobalt.js",
+        "test": "tsx src/util/test.ts",
         "token:jwt": "node src/util/generate-jwt-secret"
     },
     "repository": {
@@ -47,5 +49,11 @@
         "freebind": "^0.2.3",
         "rate-limit-redis": "^4.3.1",
         "redis": "4.7.1"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "@types/node": "^25.0.3",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3"
     }
 }
