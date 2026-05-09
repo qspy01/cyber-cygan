@@ -129,6 +129,12 @@ export const loadEnvs = (env = process.env) => {
         // "never" | "key" | "always"
         enableDeprecatedYoutubeHls: env.ENABLE_DEPRECATED_YOUTUBE_HLS ?? "never",
 
+        smtpHost: env.SMTP_HOST,
+        smtpPort: parseInt(env.SMTP_PORT) || 587,
+        smtpUser: env.SMTP_USER,
+        smtpPass: env.SMTP_PASS,
+        smtpFrom: env.SMTP_FROM || 'CyberCygan <noreply@cybercygan.com>',
+
         envFile: env.API_ENV_FILE,
         envRemoteReloadInterval: 300,
 
@@ -141,6 +147,14 @@ let loggedProxyWarning = false;
 export const validateEnvs = async (env) => {
     if (env.sessionEnabled && env.jwtSecret.length < 16) {
         throw new Error("JWT_SECRET env is too short (must be at least 16 characters long)");
+    }
+
+    if (!env.jwtSecret) {
+        throw new Error("JWT_SECRET is required");
+    }
+
+    if (!env.smtpHost || !env.smtpUser || !env.smtpPass) {
+        throw new Error("SMTP_HOST, SMTP_USER, and SMTP_PASS are required");
     }
 
     if (env.instanceCount > 1 && !env.redisURL) {

@@ -1,4 +1,5 @@
-import { getVersion } from "@imput/version-info";
+import "dotenv/config";
+import { getVersion } from "@cybercygan/version-info";
 import { loadEnvs, validateEnvs } from "./core/env.js";
 
 const version = await getVersion();
