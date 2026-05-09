@@ -1,0 +1,42 @@
+services:
+  cobalt-api:
+    image: ghcr.io/imputnet/cobalt:latest
+    restart: always
+    container_name: cobalt-api
+    environment:
+      - API_URL=https://api.185.167.99.145.sslip.io/
+      - API_NAME=cobalt-instance
+      - REDIS_HOST=cobalt-redis
+    depends_on:
+      - cobalt-redis
+
+  cobalt-web:
+    image: ghcr.io/imputnet/cobalt-web:latest
+    restart: always
+    container_name: cobalt-web
+    environment:
+      - API_URL=https://api.185.167.99.145.sslip.io/
+
+  cobalt-redis:
+    image: redis:alpine
+    restart: always
+    container_name: cobalt-redis
+
+  caddy:
+    image: caddy:latest
+    restart: always
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - cobalt-api
+      - cobalt-web
+
+volumes:
+  caddy_data:
+  caddy_config:
