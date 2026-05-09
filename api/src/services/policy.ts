@@ -17,7 +17,10 @@ export async function getRedisClient(): Promise<RedisClientType | null> {
         await client.connect();
         redisClient = client as RedisClientType;
         return redisClient;
-    })();
+    })().catch(err => {
+        redisClientPromise = null;
+        throw err;
+    });
 
     return redisClientPromise;
 }
@@ -72,16 +75,10 @@ export async function checkAndIncrementUsage(
     const today = new Date().toISOString().split('T')[0];
     const key = `usage:${identifier}:${today}`;
 
-    const multi = client.multi();
-    multi.incr(key);
-    multi.expire(key, 86400); // 24 hours
-    
-    const results = await multi.exec();
-    if (!results || results.length === 0) {
-        return { allowed: true, remaining: quota.dailyLimit };
+    const count = await client.incr(key);
+    if (count === 1) {
+        await client.expire(key, 86400); // 24 hours
     }
-
-    const count = results[0] as number;
 
     if (count > quota.dailyLimit) {
         return { allowed: false, remaining: 0 };
